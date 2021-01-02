@@ -47,7 +47,6 @@ export default class Scene{
         this.ctx.fillRect(0, 0, this.width, this.height);
         this.AppleInst.render();
         this.SnakeInst.render();
-        window.requestAnimationFrame(this.render);
     }
 
 }
