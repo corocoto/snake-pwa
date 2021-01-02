@@ -1,0 +1,25 @@
+{
+  "name": "snake",
+  "version": "1.0.0",
+  "description": "Snake videogame",
+  "private": true,
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/corocoto/snake.git"
+  },
+  "keywords": [
+    "snake",
+    "ecmascript",
+    "javascript",
+    "videogame",
+    "canvas"
+  ],
+  "author": "Artem Gusev (corocoto) <gusev2014russia@mail.ru>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/corocoto/snake/issues"
+  },
+  "homepage": "https://github.com/corocoto/snake#readme"
+}

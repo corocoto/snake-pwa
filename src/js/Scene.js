@@ -2,6 +2,7 @@ const BG_COLOR = '#CE9752';
 const SCALE = 20;
 
 import Apple from './Apple.js';
+import Snake from './Snake.js';
 
 export default class Scene{
     constructor(canvasRef) {
@@ -11,7 +12,13 @@ export default class Scene{
 
         this.setSceneSize();
         this.AppleInst = new Apple(this.ctx, SCALE);
-        this.AppleInst.generatePosition();
+        this.SnakeInst = new Snake(this.ctx, SCALE, SCALE);
+        
+        while(this.AppleInst.xPos === this.SnakeInst.xPos && this.AppleInst.yPos === this.SnakeInst.yPos){
+            this.AppleInst.generatePosition();
+            this.SnakeInst.generatePosition();
+        } 
+
         this.render();
     }
 
@@ -39,6 +46,7 @@ export default class Scene{
         this.ctx.fillStyle = BG_COLOR;
         this.ctx.fillRect(0, 0, this.width, this.height);
         this.AppleInst.render();
+        this.SnakeInst.render();
         window.requestAnimationFrame(this.render);
     }
 
