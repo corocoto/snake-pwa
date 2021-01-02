@@ -1,4 +1,4 @@
-const SNAKE_COLOR = '#FFFFFF';
+const SNAKE_COLOR = '#017D89';
 
 export default class Snake {
     constructor(width = 20, height = 20) {
