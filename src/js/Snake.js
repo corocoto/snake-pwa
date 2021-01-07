@@ -24,7 +24,6 @@ export default class Snake {
     }
 
     generatePosition() {
-        debugger;
         this.x = (Math.floor(Math.random() * this.sceneColumns - 1) + 1) * this.scale;
         this.y = (Math.floor(Math.random() * this.sceneRows - 1) + 1) * this.scale;
     }
@@ -34,10 +33,12 @@ export default class Snake {
             this.tail[i] = this.tail[i+1];
         }
         
-        this.tail[this.countOfEatApples - 1] = { 
-            x: this.x, 
-            y: this.y 
-        };
+        if (this.countOfEatApples > 0){
+            this.tail[this.countOfEatApples - 1] = { 
+                x: this.x, 
+                y: this.y 
+            };
+        }
 
         this.x += this.xSpeed;
         this.y += this.ySpeed;
@@ -54,7 +55,6 @@ export default class Snake {
     }
 
     render(){
-        debugger;
         this.ctx.fillStyle = SNAKE_COLOR;
         this.tail.forEach(({x, y}) => this.ctx.fillRect(x, y, this.scale, this.scale));
         this.ctx.fillRect(this.x, this.y, this.scale, this.scale);
@@ -82,11 +82,11 @@ export default class Snake {
     }
 
     isEatApple(AppleInst) {
-        if (this.x === AppleInst.x && this.y === AppleInst.y) {
-            this.countOfEatApples++;
-            return true;
-        }
-        return false;
+        return this.x === AppleInst.x && this.y === AppleInst.y;
+    }
+
+    isEatItself(){
+        return this.tail.find(({x,y}) => this.x === x && this.y === y);
     }
 
     keyDownEventHandler({keyCode}) {

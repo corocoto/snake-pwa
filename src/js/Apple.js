@@ -4,7 +4,7 @@ export default class Apple{
     constructor(size, sceneRows, sceneColumns, ctx){
         this.ctx = ctx;
         this.size = size;
-
+        this.radius = size / 2; 
         this.sceneRows = sceneRows
         this.sceneColumns = sceneColumns;
 
@@ -19,6 +19,11 @@ export default class Apple{
 
     render() {
         this.ctx.fillStyle = APPLE_COLOR;
-		this.ctx.fillRect(this.x, this.y, this.size, this.size);
+        this.ctx.beginPath();
+		this.ctx.arc(this.x + this.radius, this.y + this.radius, this.radius, 0, 2 * Math.PI);
+        this.ctx.fill();
+        this.ctx.closePath();
+
+		// this.ctx.fillRect(this.x, this.y, this.size, this.size);
     }
 }

@@ -22,13 +22,6 @@ export default class Scene{
         this.render();
     }
 
-    setEventListeners(){
-        window.addEventListener('resize', () => {
-            this.setSceneSize();
-            this.render();
-        });
-    }
-
     setSceneSize(){
         this.width = this.canvas.width = window.innerWidth;
         this.height = this.canvas.height = window.innerHeight;
@@ -48,9 +41,18 @@ export default class Scene{
         this.SnakeInst.render();
 
         if (this.SnakeInst.isEatApple(this.AppleInst)) {
+            this.SnakeInst.countOfEatApples++;
             while(this.AppleInst.x === this.SnakeInst.x && this.AppleInst.y === this.SnakeInst.y) {
                 this.AppleInst.generatePosition();
             } 
+        }
+
+        if (this.SnakeInst.isEatItself()){
+            this.SnakeInst.countOfEatApples = 0;
+            this.SnakeInst.tail = [];
+            do {
+                this.SnakeInst.generatePosition();
+            } while (this.AppleInst.x === this.SnakeInst.x && this.AppleInst.y === this.SnakeInst.y);
         }
     }
 }
