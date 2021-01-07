@@ -1,4 +1,5 @@
 const BG_COLOR = '#CE9752';
+const SCALE = 30;
 
 import Apple from './Apple.js';
 import Snake from './Snake.js';
@@ -10,10 +11,10 @@ export default class Scene{
         this.render = this.render.bind(this);
 
         this.setSceneSize();
-        this.AppleInst = new Apple(this.ctx, SCALE);
-        this.SnakeInst = new Snake(this.ctx, SCALE, SCALE);
+        this.AppleInst = new Apple(SCALE, this.rows, this.columns, this.ctx);
+        this.SnakeInst = new Snake(SCALE, this.rows, this.columns, this.ctx, this.width, this.height);
         
-        while(this.AppleInst.xPos === this.SnakeInst.xPos && this.AppleInst.yPos === this.SnakeInst.yPos){
+        while(this.AppleInst.x === this.SnakeInst.x && this.AppleInst.y === this.SnakeInst.y) {
             this.AppleInst.generatePosition();
             this.SnakeInst.generatePosition();
         } 
@@ -24,31 +25,32 @@ export default class Scene{
     setEventListeners(){
         window.addEventListener('resize', () => {
             this.setSceneSize();
-            this.render()
+            this.render();
         });
     }
+
     setSceneSize(){
         this.width = this.canvas.width = window.innerWidth;
         this.height = this.canvas.height = window.innerHeight;
-    }
-
-    isSnakeEatApple(){
-        const APPLE_RADIUS = SCALE / 2;
-        if (this.SnakeInst.xPos >= this.AppleInst.xPos - APPLE_RADIUS && 
-            this.SnakeInst.xPos <= this.AppleInst.xPos + APPLE_RADIUS &&
-            this.SnakeInst.yPos >= this.AppleInst.yPos - APPLE_RADIUS &&
-            this.SnakeInst.yPos <= this.AppleInst.yPos + APPLE_RADIUS){
-            debugger;
-        }
+        this.rows = this.height / SCALE;
+        this.columns = this.width / SCALE;
     }
 
     render(){
         this.ctx.clearRect(0, 0, this.width, this.height);
+        
         this.ctx.fillStyle = BG_COLOR;
         this.ctx.fillRect(0, 0, this.width, this.height);
-        this.isSnakeEatApple();
+        
         this.AppleInst.render();
+        
+        this.SnakeInst.updateCoordinates();
         this.SnakeInst.render();
-    }
 
+        if (this.SnakeInst.isEatApple(this.AppleInst)) {
+            while(this.AppleInst.x === this.SnakeInst.x && this.AppleInst.y === this.SnakeInst.y) {
+                this.AppleInst.generatePosition();
+            } 
+        }
+    }
 }

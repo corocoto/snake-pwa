@@ -1,28 +1,24 @@
 const APPLE_COLOR = '#C3321D';
 
 export default class Apple{
-    constructor(ctx, size){
+    constructor(size, sceneRows, sceneColumns, ctx){
         this.ctx = ctx;
         this.size = size;
-        this.radius = size / 2;
 
-        this.xPos = 0;
-        this.yPos = 0;
+        this.sceneRows = sceneRows
+        this.sceneColumns = sceneColumns;
+
+        this.x = 0;
+        this.y = 0;
     }
 
     generatePosition(){
-        const maxW = window.innerWidth - this.size;
-        const maxH = window.innerHeight - this.size;
-
-        this.xPos = Math.floor(Math.random() * (maxW + 1));
-        this.yPos = Math.floor(Math.random() * (maxH + 1));
+        this.x = (Math.floor(Math.random() * this.sceneColumns - 1) + 1) * this.size;
+        this.y = (Math.floor(Math.random() * this.sceneRows - 1) + 1) * this.size;
     }
 
     render() {
         this.ctx.fillStyle = APPLE_COLOR;
-        this.ctx.beginPath();
-		this.ctx.arc(this.xPos + this.radius, this.yPos + this.radius, this.radius, 0, 2 * Math.PI);
-        this.ctx.fill();
-        this.ctx.closePath();
+		this.ctx.fillRect(this.x, this.y, this.size, this.size);
     }
 }

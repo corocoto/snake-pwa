@@ -2,43 +2,91 @@ const SNAKE_COLOR = '#017D89';
 
 
 export default class Snake {
-    constructor(ctx, width, height) {
+    constructor(scale, sceneRows, sceneColumns, ctx, sceneWidth, sceneHeight) {
         this.ctx = ctx;
-        this.width = width;
-        this.height = height;
+        this.sceneRows = sceneRows;
+        this.sceneColumns = sceneColumns;
+        this.sceneWidth = sceneWidth;
+        this.sceneHeight = sceneHeight;
 
-        this.xPos = 0;
-        this.yPos = 0;
+        this.x = 0;
+        this.y = 0;
+        this.turnOn = 'RIGHT';
+        this.xSpeed = scale;
+        this.ySpeed = 0;
+        this.scale = scale;
+
+        this.tail = [];
+        this.countOfEatApples = 0;
+
         this.keyDownEventHandler = this.keyDownEventHandler.bind(this);
         window.addEventListener('keydown', this.keyDownEventHandler);
-        this.turnOn = 'RIGHT';
     }
 
     generatePosition() {
-        const maxW = window.innerWidth - this.width;
-        const maxH = window.innerHeight - this.height;
+        debugger;
+        this.x = (Math.floor(Math.random() * this.sceneColumns - 1) + 1) * this.scale;
+        this.y = (Math.floor(Math.random() * this.sceneRows - 1) + 1) * this.scale;
+    }
 
-        this.xPos = Math.floor(Math.random() * (maxW + 1));
-        this.yPos = Math.floor(Math.random() * (maxH + 1));
+    updateCoordinates(){
+        for (let i = 0; i < this.tail.length - 1; i++) {
+            this.tail[i] = this.tail[i+1];
+        }
+        
+        this.tail[this.countOfEatApples - 1] = { 
+            x: this.x, 
+            y: this.y 
+        };
+
+        this.x += this.xSpeed;
+        this.y += this.ySpeed;
+      
+        if (this.x > this.sceneWidth) {
+            this.x = 0;
+        } else if (this.y > this.sceneHeight) {
+            this.y = 0;
+        } else if (this.x < 0) {
+            this.x = this.sceneWidth;
+        } else if (this.y < 0) {
+            this.y = this.sceneHeight;
+        }
     }
 
     render(){
+        debugger;
         this.ctx.fillStyle = SNAKE_COLOR;
-        this.ctx.fillRect(this.xPos, this.yPos, this.width, this.height);
+        this.tail.forEach(({x, y}) => this.ctx.fillRect(x, y, this.scale, this.scale));
+        this.ctx.fillRect(this.x, this.y, this.scale, this.scale);
+    }
+
+    setDirection(){
         switch(this.turnOn) {
             case 'RIGHT':
-                this.xPos += this.width;
+                this.xSpeed = this.scale;
+                this.ySpeed = 0; 
                 break;
             case 'LEFT':
-                this.xPos -= this.width;
+                this.xSpeed = -this.scale;
+                this.ySpeed = 0;
                 break;
             case 'TOP':
-                this.yPos -= this.width;
+                this.xSpeed = 0
+                this.ySpeed = -this.scale;
                 break;
             case 'BOTTOM':
-                this.yPos += this.width;  
+                this.xSpeed = 0;
+                this.ySpeed = this.scale;  
                 break;          
         }
+    }
+
+    isEatApple(AppleInst) {
+        if (this.x === AppleInst.x && this.y === AppleInst.y) {
+            this.countOfEatApples++;
+            return true;
+        }
+        return false;
     }
 
     keyDownEventHandler({keyCode}) {
@@ -60,5 +108,6 @@ export default class Snake {
                 this.turnOn = 'LEFT';
                 break;                        
         }
+        this.setDirection();
     }
 }
