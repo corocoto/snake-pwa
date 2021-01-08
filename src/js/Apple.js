@@ -1,4 +1,4 @@
-const APPLE_COLOR = '#C3321D';
+const APPLE_COLOR = '#de8a66';
 
 export default class Apple{
     constructor(size, sceneRows, sceneColumns, ctx){

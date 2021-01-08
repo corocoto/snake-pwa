@@ -1,4 +1,4 @@
-const SNAKE_COLOR = '#017D89';
+const SNAKE_COLOR = '#4f4c44';
 
 
 export default class Snake {

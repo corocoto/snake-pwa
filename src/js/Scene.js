@@ -1,5 +1,6 @@
-const BG_COLOR = '#CE9752';
-const SCALE = 30;
+const BG_COLOR = '#ece1c9';
+const SCALE = 40;
+const RESULT_PANEL_BG_COLOR = 'rgba(225,225,225,0.5)';
 
 import Apple from './Apple.js';
 import Snake from './Snake.js';
@@ -23,7 +24,7 @@ export default class Scene{
     }
 
     setSceneSize(){
-        this.width = this.canvas.width = window.innerWidth;
+        this.width = this.canvas.width = window.innerWidth - SCALE * 6;
         this.height = this.canvas.height = window.innerHeight;
         this.rows = this.height / SCALE;
         this.columns = this.width / SCALE;
@@ -39,6 +40,7 @@ export default class Scene{
         
         this.SnakeInst.updateCoordinates();
         this.SnakeInst.render();
+        this.displayResult();
 
         if (this.SnakeInst.isEatApple(this.AppleInst)) {
             this.SnakeInst.countOfEatApples++;
@@ -54,5 +56,10 @@ export default class Scene{
                 this.SnakeInst.generatePosition();
             } while (this.AppleInst.x === this.SnakeInst.x && this.AppleInst.y === this.SnakeInst.y);
         }
+    }
+
+    displayResult(){
+        // this.ctx.fillStyle = RESULT_PANEL_BG_COLOR;
+        // this.ctx.fillRect(this.width * .85, 0, this.width * .15, this.height * .15);
     }
 }
