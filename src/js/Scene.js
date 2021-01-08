@@ -9,6 +9,7 @@ export default class Scene{
     constructor(canvasRef) {
         this.canvas = canvasRef;
         this.ctx = this.canvas.getContext('2d');
+        this.resultValueBlock = document.querySelector('.text-container__result__value');
         this.render = this.render.bind(this);
 
         this.setSceneSize();
@@ -37,13 +38,13 @@ export default class Scene{
         this.ctx.fillRect(0, 0, this.width, this.height);
         
         this.AppleInst.render();
-        
+
         this.SnakeInst.updateCoordinates();
         this.SnakeInst.render();
-        this.displayResult();
 
         if (this.SnakeInst.isEatApple(this.AppleInst)) {
             this.SnakeInst.countOfEatApples++;
+            this.updateUiResult(this.SnakeInst.countOfEatApples);
             while(this.AppleInst.x === this.SnakeInst.x && this.AppleInst.y === this.SnakeInst.y) {
                 this.AppleInst.generatePosition();
             } 
@@ -51,6 +52,7 @@ export default class Scene{
 
         if (this.SnakeInst.isEatItself()){
             this.SnakeInst.countOfEatApples = 0;
+            this.updateUiResult(this.SnakeInst.countOfEatApples);
             this.SnakeInst.tail = [];
             do {
                 this.SnakeInst.generatePosition();
@@ -58,8 +60,7 @@ export default class Scene{
         }
     }
 
-    displayResult(){
-        // this.ctx.fillStyle = RESULT_PANEL_BG_COLOR;
-        // this.ctx.fillRect(this.width * .85, 0, this.width * .15, this.height * .15);
+    updateUiResult(res){
+        this.resultValueBlock.textContent = res;
     }
 }
