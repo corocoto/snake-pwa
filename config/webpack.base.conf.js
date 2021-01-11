@@ -7,7 +7,15 @@ const copyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
 	entry: {
-		index: `${paths.src}/js/index.js`,
+		modules: [
+            `${paths.src}/js/Apple.js`,
+            `${paths.src}/js/Snake.js`,
+            `${paths.src}/js/Scene.js`,
+        ],
+        main: {
+            import: `${paths.src}/js/index`,
+            dependOn: 'modules'
+        }
 	},
 	output: {
 		path: paths.dist,
