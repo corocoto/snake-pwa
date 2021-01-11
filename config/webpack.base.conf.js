@@ -4,10 +4,6 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const copyWebpackPlugin = require('copy-webpack-plugin');
-const ImageminPlugin = require('imagemin-webpack-plugin').default;
-const mozjpeg = require('imagemin-mozjpeg');
-const pngquant = require('imagemin-pngquant');
-
 
 module.exports = {
 	entry: {
@@ -73,19 +69,10 @@ module.exports = {
 					to   : `${paths.dist}/serviceWorker.js`,
 				},
 				{
-					from : `${paths.src}/img`,
-					to   : `${paths.dist}/img`,
+					from : `${paths.src}/assets`,
+					to   : `${paths.dist}/assets`,
 				},
 			]
-		}),
-		new ImageminPlugin({
-			interlaced  : true,
-			progressive : true,
-			svgPlugins  : [ {removeViewBox: false} ],
-			plugins     : [
-				mozjpeg({quality: 50}),
-				pngquant(),
-			],
 		}),
 		new HTMLWebpackPlugin({
 			inject: 'body',
