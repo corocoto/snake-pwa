@@ -10,6 +10,7 @@ export default class Scene {
 		this.ctx = this.canvas.getContext('2d');
 		this.resultValueBlock = document.querySelector('.text-container__result__value');
 		this.render = this.render.bind(this);
+		this.setSceneSize = this.setSceneSize.bind(this);
 
 		this.setSceneSize();
 		this.AppleInst = new Apple(SCALE, this.rows, this.columns, this.ctx);
@@ -21,6 +22,8 @@ export default class Scene {
 		}
 
 		this.render();
+
+		window.addEventListener('resize', this.setSceneSize);
 	}
 
 	setSceneSize () {
