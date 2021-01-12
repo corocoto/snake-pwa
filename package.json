@@ -29,7 +29,7 @@
   "bugs": {
     "url": "https://github.com/corocoto/snake-pwa/issues"
   },
-  "homepage": "https://github.com/corocoto/snake-pwa",
+  "homepage": "https://corocoto.github.io/snake-pwa/",
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.10",
