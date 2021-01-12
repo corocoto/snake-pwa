@@ -1,7 +1,7 @@
 {
   "name": "snake",
   "version": "1.0.0",
-  "description": "Snake videogame",
+  "description": "Snake video game",
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack serve --config config/webpack.dev.conf.js",
