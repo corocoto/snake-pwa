@@ -3,7 +3,7 @@ const staticAssets = [
 	'./assets/favicon.ico',
 	'./css/index.css',
 	'./js/index.bundle.js',
-	'./js/single.bundle.js'
+	'./js/single.bundle.js',
 ];
 
 self.addEventListener('install', async () => {

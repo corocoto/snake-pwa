@@ -3,62 +3,62 @@ const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const copyWebpackPlugin = require('copy-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
 	entry: {
 		modules: [
-            `${paths.src}/js/Apple.js`,
-            `${paths.src}/js/Snake.js`,
-            `${paths.src}/js/Scene.js`,
-        ],
-        main: {
-            import: `${paths.src}/js/index`,
-            dependOn: 'modules'
-        }
+			`${paths.src}/js/Apple.js`,
+			`${paths.src}/js/Snake.js`,
+			`${paths.src}/js/Scene.js`,
+		],
+		main: {
+			import   : `${paths.src}/js/index`,
+			dependOn : 'modules',
+		},
 	},
 	output: {
-		path: paths.dist,
-		filename: 'js/[name].bundle.js',
+		path     : paths.dist,
+		filename : 'js/[name].bundle.js',
 	},
 	module: {
-		rules: [ 
+		rules: [
 			{
-				test: /\.js$/i,
-				exclude: '/node_modules/',
-				use: 'babel-loader',
-			}, 
+				test    : /\.js$/i,
+				exclude : '/node_modules/',
+				use     : 'babel-loader',
+			},
 			{
-				test: /\.(png|jpe?g|svg|gif)$/i,
-				use: [
+				test : /\.(png|jpe?g|svg|gif)$/i,
+				use  : [
 					{
 						loader  : 'file-loader',
 						options : {
 							name     : '[path][name].[ext]',
 							emitFile : false,
 						},
-					}
+					},
 				],
-				type: 'asset/resource'	
-				
-			}, 
+				type: 'asset/resource',
+
+			},
 			{
-				test: /\.css$/i,
-				use: [
+				test : /\.css$/i,
+				use  : [
 					MiniCssExtractPlugin.loader,
 					'css-loader',
 					{
-						loader: 'postcss-loader',
-						options: {
+						loader  : 'postcss-loader',
+						options : {
 							postcssOptions: {
 								config: path.resolve(paths.root, 'postcss.config.js'),
 							},
 							sourceMap: true,
-							
+
 						},
 					},
 				],
-			} 
+			},
 		],
 	},
 	plugins: [
@@ -66,7 +66,7 @@ module.exports = {
 		new MiniCssExtractPlugin({
 			filename: 'css/[name].css',
 		}),
-		new copyWebpackPlugin({
+		new CopyWebpackPlugin({
 			patterns: [
 				{
 					from : `${paths.src}/manifest.json`,
@@ -80,11 +80,11 @@ module.exports = {
 					from : `${paths.src}/assets`,
 					to   : `${paths.dist}/assets`,
 				},
-			]
+			],
 		}),
 		new HTMLWebpackPlugin({
-			inject: 'body',
-			template: `${paths.src}/index.html`,
+			inject   : 'body',
+			template : `${paths.src}/index.html`,
 		}),
 	],
 };
