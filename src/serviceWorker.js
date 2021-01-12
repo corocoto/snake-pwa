@@ -4,6 +4,7 @@ const staticAssets = [
 	'./css/index.css',
 	'./js/index.bundle.js',
 	'./js/single.bundle.js',
+	'./js/modules.bundle.js',
 ];
 
 self.addEventListener('install', async () => {
