@@ -2,6 +2,9 @@ const {merge} = require('webpack-merge');
 const baseWebpackConfig = require('./webpack.base.conf');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const paths = require('./paths');
+const ImageminPlugin = require('imagemin-webpack-plugin').default;
+const mozjpeg = require('imagemin-mozjpeg');
+const pngquant = require('imagemin-pngquant');
 
 module.exports = merge(baseWebpackConfig, {
 	mode    : 'production',
@@ -24,4 +27,15 @@ module.exports = merge(baseWebpackConfig, {
 		maxEntrypointSize : 512000,
 		maxAssetSize      : 512000,
 	},
+	plugins: [
+		new ImageminPlugin({
+			interlaced  : true,
+			progressive : true,
+			svgPlugins  : [ {removeViewBox: false} ],
+			plugins     : [
+				mozjpeg({quality: 50}),
+				pngquant(),
+			],
+		}),
+	]
 });
