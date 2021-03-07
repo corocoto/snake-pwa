@@ -1,5 +1,4 @@
-const BG_COLOR = '#ece1c9';
-const SCALE = 40;
+import {BG_COLOR, SCALE} from './constants';
 
 import Apple from './Apple.js';
 import Snake from './Snake.js';

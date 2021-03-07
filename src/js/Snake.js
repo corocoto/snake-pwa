@@ -1,5 +1,4 @@
-const SNAKE_COLOR = '#4f4c44';
-
+import {SNAKE_COLOR} from './constants';
 
 export default class Snake {
 	constructor (scale, sceneRows, sceneColumns, ctx, sceneWidth, sceneHeight) {
