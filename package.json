@@ -9,9 +9,7 @@
     "deploy": "gh-pages -d dist"
   },
   "browserslist": [
-    "> 1%",
-    "not ie <= 8",
-    "last 15 versions"
+    "defaults"
   ],
   "repository": {
     "type": "git",
