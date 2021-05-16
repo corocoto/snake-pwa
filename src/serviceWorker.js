@@ -9,7 +9,7 @@ const staticAssets = [
 
 self.addEventListener('install', async () => {
 	const cache = await caches.open('static-cache');
-	cache.addAll(staticAssets);
+	await cache.addAll(staticAssets);
 });
 
 self.addEventListener('fetch', evt => {
@@ -32,7 +32,7 @@ async function networkFirst (req) {
 	const cache = await caches.open('dynamic-cache');
 	try {
 		const res = await fetch(req);
-		cache.put(req, res.clone());
+		await cache.put(req, res.clone());
 		return res;
 	} catch (error) {
 		return await cache.match(req);
