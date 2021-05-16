@@ -29,6 +29,7 @@ module.exports = {
 				use     : 'babel-loader',
 			},
 			{
+				// eslint-disable-next-line prefer-named-capture-group
 				test : /\.(png|jpe?g|svg|gif)$/i,
 				use  : [
 					{
@@ -40,7 +41,6 @@ module.exports = {
 					},
 				],
 				type: 'asset/resource',
-
 			},
 			{
 				test : /\.css$/i,

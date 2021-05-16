@@ -27,6 +27,7 @@ module.exports = merge(baseWebpackConfig, {
 		maxEntrypointSize : 512000,
 		maxAssetSize      : 512000,
 	},
+	// eslint-disable-next-line no-dupe-keys
 	plugins: [
 		new ImageminPlugin({
 			interlaced  : true,
@@ -37,5 +38,5 @@ module.exports = merge(baseWebpackConfig, {
 				pngquant(),
 			],
 		}),
-	]
+	],
 });
