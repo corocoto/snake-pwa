@@ -5,7 +5,7 @@
         {
           "modules": false,
           "useBuiltIns": "usage",
-          "corejs": "3.12"
+          "corejs": "3.15"
         }
       ]
     ]
