@@ -1,5 +1,7 @@
 # [Snake game](https://corocoto.github.io/snake-pwa/)
 
+[![eslint check](https://github.com/corocoto/snake-pwa/workflows/eslint-check/badge.svg)](https://github.com/corocoto/snake-pwa/actions)
+
 ## Introduction
 
 **Snake** — is video game where the player controls a creature, that looks like snake. 
