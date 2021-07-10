@@ -33,4 +33,4 @@ If you still have questions about the work of this application :grey_question: o
 
 If you find a bug :bug:, please create an appropriate issue with detailed information about it :speech_balloon:.
 
-Thanks!
+Thanks! 
