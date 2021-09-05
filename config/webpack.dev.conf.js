@@ -8,7 +8,7 @@ module.exports = merge(baseWebpackConfig, {
 	devtool   : 'eval-cheap-module-source-map',
 	devServer : {
 		historyApiFallback : true,
-		contentBase        : paths.dist,
+		static             : paths.dist,
 		open               : true,
 		compress           : true,
 		port               : 8080,
@@ -21,7 +21,7 @@ module.exports = merge(baseWebpackConfig, {
 	],
 	performance: {
 		hints             : 'warning',
-		maxEntrypointSize : 512000,
-		maxAssetSize      : 512000,
+		maxEntrypointSize : 1024000,
+		maxAssetSize      : 1024000,
 	},
 });
